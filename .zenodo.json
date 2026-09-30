@@ -1,0 +1,27 @@
+{
+  "title": "PhaseUtils.jl",
+  "upload_type": "software",
+  "description": "<p>Utilities for phase retrieval and wavefront-analysis workflows in Julia: phase wrapping and unwrapping, tilts and coordinate axes, aperture finding, windowing, finite-difference operators and Fourier-based solvers.</p>",
+  "creators": [
+    {
+      "name": "Soloviev, Oleg",
+      "affiliation": "Flexible Optical B.V. (OKO Technologies)",
+      "orcid": "0000-0003-3761-9192"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "version": "0.1.0",
+  "keywords": [
+    "phase unwrapping",
+    "wavefront",
+    "phase retrieval",
+    "image processing",
+    "Julia"
+  ],
+  "grants": [
+    {
+      "id": "10.13039/501100000780::101111948"
+    }
+  ]
+}
