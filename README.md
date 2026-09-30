@@ -4,8 +4,8 @@ Part of the [Phase.jl](https://github.com/JuliaPhase/Phase.jl) ecosystem.
 
 <!-- DOI badge: add after first Zenodo release -->
 
-[![Build Status](https://github.com/olejorik/PhaseUtils.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/olejorik/PhaseUtils.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Coverage](https://codecov.io/gh/olejorik/PhaseUtils.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/olejorik/PhaseUtils.jl)
+[![Build Status](https://github.com/JuliaPhase/PhaseUtils.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaPhase/PhaseUtils.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/JuliaPhase/PhaseUtils.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/JuliaPhase/PhaseUtils.jl)
 
 ## Overview
 

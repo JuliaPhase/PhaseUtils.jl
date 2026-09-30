@@ -16,5 +16,5 @@ keywords:
   - "image processing"
   - "Julia"
 license: MIT
-repository-code: "https://github.com/olejorik/PhaseUtils.jl"
+repository-code: "https://github.com/JuliaPhase/PhaseUtils.jl"
 version: "0.1.0"

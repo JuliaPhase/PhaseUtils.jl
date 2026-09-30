@@ -20,13 +20,13 @@ makedocs(;
     sitename="PhaseUtils",
     modules=[PhaseUtils],
     authors="Oleg Soloviev",
-    # repo="https://github.com/olejorik/PhaseUtils.jl/blob/{commit}{path}#L{line}",
+    # repo="https://github.com/JuliaPhase/PhaseUtils.jl/blob/{commit}{path}#L{line}",
     checkdocs=:exports,
     # doctest=:fix,
     format=Documenter.HTML(;
         # Use clean URLs, unless built as a "local" build
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://olejorik.github.io/PhaseUtils.jl/stable/",
+        canonical="https://juliaphase.github.io/PhaseUtils.jl/stable/",
         assets=["assets/favicon.ico"],
         highlights=["yaml"],
     ),
@@ -53,4 +53,4 @@ makedocs(;
 #=deploydocs(
     repo = "<repository url>"
 )=#
-deploydocs(; repo="github.com/olejorik/PhaseUtils.jl.git", target="build")
+deploydocs(; repo="github.com/JuliaPhase/PhaseUtils.jl.git", target="build")
