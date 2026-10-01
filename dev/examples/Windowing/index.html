@@ -251,26 +251,26 @@ f2 = 3.7
 background = 1 / N .* (x .- N / 2)
 test_signal =
     sin.(2π * f1 * x / N) .+ 0.5 * sin.(2π * f2 * x / N) .+ 5background .+ 0.1 * randn(N)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">256-element Vector{Float64}:
- -2.2864162419455467
- -2.030110396868445
- -1.6908902217554036
- -1.8022571731790977
- -1.3626172045495544
- -1.1833469938281571
- -0.9665606273696672
- -0.9955203894356733
- -1.073223169692356
- -1.0919751166237819
+ -2.201793772170223
+ -2.0719441289025786
+ -1.8677114319850943
+ -1.501621010383533
+ -1.3131872678281693
+ -1.3536276974648283
+ -1.2759628283653819
+ -1.1299469124323038
+ -0.762493315955433
+ -0.8321413288229705
   ⋮
-  2.5380848963492575
-  2.689153242369453
-  2.5698320024949477
-  2.992742745921755
-  2.964799650283688
-  3.0361450184513834
-  3.196670306285222
-  3.297148679940087
-  3.0568700685669694</code></pre><p>Create matching windows</p><pre><code class="language-julia hljs">window_narrow = GaussianWindow(N / 5)((N,))
+  2.5064156477016275
+  2.464721927326628
+  2.7442222819190456
+  2.929723445682387
+  2.9084680897813397
+  2.9716303283794083
+  2.9902251577539336
+  3.2574688773301754
+  3.107887724859975</code></pre><p>Create matching windows</p><pre><code class="language-julia hljs">window_narrow = GaussianWindow(N / 5)((N,))
 window_medium = GaussianWindow(N / 2)((N,))
 window_wide = GaussianWindow(N)((N,))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">256-element Vector{Float64}:
  0.8833574520381205
@@ -295,26 +295,26 @@ window_wide = GaussianWindow(N)((N,))</code></pre><pre class="documenter-example
  0.8833574520381205</code></pre><p>Apply different windows</p><pre><code class="language-julia hljs">windowed_narrow = test_signal .* window_narrow
 windowed_medium = test_signal .* window_medium
 windowed_wide = test_signal .* window_wide</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">256-element Vector{Float64}:
- -2.0197228257835933
- -1.796791717901435
- -1.49943785939678
- -1.601246425384953
- -1.212933532868691
- -1.05533500535987
- -0.8636063020622536
- -0.8911251599722941
- -0.9624403078449668
- -0.9810363409831342
+ -1.9449709364976904
+ -1.833817538449809
+ -1.6562383503757314
+ -1.3341410487595446
+ -1.1689334809269096
+ -1.2071951006846948
+ -1.1400521690731786
+ -1.011455047818988
+ -0.6837853695874261
+ -0.7476002630292453
   ⋮
-  2.276092501505783
-  2.407155231300601
-  2.29610336874099
-  2.668994131290872
-  2.639116034980075
-  2.6975153324927237
-  2.8347248210339027
-  2.918210482515894
-  2.700308954980913</code></pre><p>Compute FFT spectra, normalised by window energy so peak amplitudes are comparable</p><pre><code class="language-julia hljs">fft_original = abs.(fft(test_signal))
+  2.247692293349281
+  2.2062589024632766
+  2.451918265462879
+  2.6127921263821188
+  2.588972503499635
+  2.640196144976136
+  2.651654585241041
+  2.8830910423083904
+  2.745375781852859</code></pre><p>Compute FFT spectra, normalised by window energy so peak amplitudes are comparable</p><pre><code class="language-julia hljs">fft_original = abs.(fft(test_signal))
 fft_narrow = abs.(fft(windowed_narrow))
 fft_medium = abs.(fft(windowed_medium))
 fft_wide = abs.(fft(windowed_wide))
@@ -374,4 +374,4 @@ ax3.xticks = (
 )
 axislegend(ax3; position=:rt)
 
-fig</code></pre><img src="f0a2f115.png" alt="Example block output"/><h2 id="Summary"><a class="docs-heading-anchor" href="#Summary">Summary</a><a id="Summary-1"></a><a class="docs-heading-anchor-permalink" href="#Summary" title="Permalink"></a></h2><p>PhaseUtils provides three complementary window types, all following the same functor interface: construct a window object, then call it with a size tuple to get an array.</p><table><tr><th style="text-align: right">Type</th><th style="text-align: right">Parameters</th><th style="text-align: right">Reaches 0 at edges?</th><th style="text-align: right">Flat top?</th></tr><tr><td style="text-align: right"><code>GaussianWindow(width)</code></td><td style="text-align: right">width (+ optional center)</td><td style="text-align: right">No</td><td style="text-align: right">No</td></tr><tr><td style="text-align: right"><code>HannWindow()</code></td><td style="text-align: right">none</td><td style="text-align: right">Yes</td><td style="text-align: right">No</td></tr><tr><td style="text-align: right"><code>TukeyWindow(alpha)</code></td><td style="text-align: right">alpha ∈ [0,1] (scalar or tuple)</td><td style="text-align: right">Yes (for α &gt; 0)</td><td style="text-align: right">Yes</td></tr></table><p>All windows are N-dimensional and separable: the N-D window is the outer product of 1D windows applied along each dimension. Asymmetric behaviour is available via tuple parameters.</p><p>Typical use cases:</p><ul><li><strong>Fourier analysis</strong>: apply before FFT to suppress spectral leakage</li><li><strong>Image tapering</strong>: suppress edge artefacts before iterative algorithms</li><li><strong>Apodisation</strong>: smooth the pupil boundary in phase retrieval</li></ul><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../guides/tilts_axes/">« Tilts and Axes</a><a class="docs-footer-nextpage" href="../../api/">API »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Thursday 1 October 2026 12:49">Thursday 1 October 2026</span>. Using Julia version 1.13.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+fig</code></pre><img src="62b2d04c.png" alt="Example block output"/><h2 id="Summary"><a class="docs-heading-anchor" href="#Summary">Summary</a><a id="Summary-1"></a><a class="docs-heading-anchor-permalink" href="#Summary" title="Permalink"></a></h2><p>PhaseUtils provides three complementary window types, all following the same functor interface: construct a window object, then call it with a size tuple to get an array.</p><table><tr><th style="text-align: right">Type</th><th style="text-align: right">Parameters</th><th style="text-align: right">Reaches 0 at edges?</th><th style="text-align: right">Flat top?</th></tr><tr><td style="text-align: right"><code>GaussianWindow(width)</code></td><td style="text-align: right">width (+ optional center)</td><td style="text-align: right">No</td><td style="text-align: right">No</td></tr><tr><td style="text-align: right"><code>HannWindow()</code></td><td style="text-align: right">none</td><td style="text-align: right">Yes</td><td style="text-align: right">No</td></tr><tr><td style="text-align: right"><code>TukeyWindow(alpha)</code></td><td style="text-align: right">alpha ∈ [0,1] (scalar or tuple)</td><td style="text-align: right">Yes (for α &gt; 0)</td><td style="text-align: right">Yes</td></tr></table><p>All windows are N-dimensional and separable: the N-D window is the outer product of 1D windows applied along each dimension. Asymmetric behaviour is available via tuple parameters.</p><p>Typical use cases:</p><ul><li><strong>Fourier analysis</strong>: apply before FFT to suppress spectral leakage</li><li><strong>Image tapering</strong>: suppress edge artefacts before iterative algorithms</li><li><strong>Apodisation</strong>: smooth the pupil boundary in phase retrieval</li></ul><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../guides/tilts_axes/">« Tilts and Axes</a><a class="docs-footer-nextpage" href="../../api/">API »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Thursday 1 October 2026 13:54">Thursday 1 October 2026</span>. Using Julia version 1.13.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
